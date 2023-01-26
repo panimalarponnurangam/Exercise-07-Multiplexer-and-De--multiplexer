@@ -42,30 +42,59 @@ When the control i/p AB = 01, the upper second AND gate is permitted while the r
 
 If the data bit D is low, the output Y1 is low. IF data bit D is high, the output Y1 is high. The value of the output Y1 depends upon the value of data bit D, the remaining outputs are in a low state.
 
-If the control input changes to AB = 10, then all the gates are restricted except the third AND gate from the top. Then, data bit D is transmitted only to the output Y2; and, Y2 = Data. . The best example of 1X4 demultiplexer is IC 74155.
+If the control input changes to AB = 10, then all the gates are restricted except the third AND gate from the top. Then, data bit D is transmitted only to the output Y2; and, Y2 = Data. . The best example of 1X4 demultiplexer is IC 74155. 
 
  
  
 ### Procedure
-/* write all the steps invloved */
-
+1.start the module using module projname()
+2.declare the inputs and outputs along with the select lines according to the mux and demux .
+3.use wire to assign intermediate outputs.
+4.use and,or,not gates to get the desired output.
+5.end the module
+6.generate rtl realization and timing disgram
 
 
 ### PROGRAM 
 /*
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
+Developed by: panimalar.p
+RegisterNumber:  22009107
 */
+~~~
+module mux(I0,I1,I2,I3,S0,S1,Y);
+input I0,I1,I2,I3,S0,S1;
+output Y;
+not(S0C,S0);
+not(S1C,S1);
+wire P,Q,R,S,S0C,S1C;
+and(P,S0C,S1C,I0);
+and(Q,S0C,S1,I1);
+and(R,S0,S1C,I3);
+and(S,S0,S1,I3);
+or(Y,P,R,Q,S);
+endmodule
 
-
-
+module demux(y0,y1,y2,y3,s0,s1,i);
+input s0,s1,i;
+output y0,y1,y2,y3;
+wire s0c,s1c;
+nor(s0c,s0);
+nor(s1c,s1);
+and(y0,i,s0c,s1);
+and(y1,i,s0c,s1);
+and(y2,i,s0,s1c);
+and(y3,i,s0,s1);
+endmodule
+~~~
 
 
 
 ### RTL LOGIC  
 
+![Screenshot (202)](https://user-images.githubusercontent.com/121490826/214828424-ce0884cf-d092-4561-982c-fe3a732e1510.png)
 
+![Screenshot (150)](https://user-images.githubusercontent.com/121490826/214828467-634cee49-5868-48f0-bf75-c82cecefd78f.png)
 
 
 
@@ -73,16 +102,21 @@ RegisterNumber:
 
 
 ### TIMING DIGRAMS  
+![Screenshot (203)](https://user-images.githubusercontent.com/121490826/214828571-954e18a0-e213-477c-92f1-60771e09387f.png)
 
+![Screenshot (201)](https://user-images.githubusercontent.com/121490826/214828605-4a6bf204-ae05-4a93-b874-8396c7287184.png)
 
 
 
 
 ### TRUTH TABLE 
 
+![Screenshot (207)](https://user-images.githubusercontent.com/121490826/214829796-5bcbc525-50e9-4b7c-b8e8-c22ede10133f.png)
 
 
+![Screenshot (206)](https://user-images.githubusercontent.com/121490826/214829818-573d5c04-379f-488b-8599-767f22355310.png)
 
 
 
 ### RESULTS 
+thus the program to design a 4:1 mux and 1:4 demux is done successful
